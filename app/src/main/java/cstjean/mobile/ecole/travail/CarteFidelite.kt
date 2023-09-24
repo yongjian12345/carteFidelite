@@ -5,7 +5,7 @@ import java.util.UUID
 
 /**
  * Un travail scolaire.
- *
+ * as
  * @property id Le ID du travail.
  * @property nom Le nom du travail.
  * @property dateRemise La date de remise du travail.
