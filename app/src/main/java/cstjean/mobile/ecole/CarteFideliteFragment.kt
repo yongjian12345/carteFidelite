@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import cstjean.mobile.ecole.databinding.FragmentTravailBinding
+import cstjean.mobile.ecole.databinding.FragmentCarteFideliteBinding
 import cstjean.mobile.ecole.travail.Travail
 import java.util.Date
 import java.util.UUID
@@ -17,7 +17,7 @@ import java.util.UUID
  * @author Gabriel T. St-Hilaire
  */
 class CarteFideliteFragment : Fragment() {
-    private var _binding: FragmentTravailBinding? = null
+    private var _binding: FragmentCarteFideliteBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
             "Binding est null. La vue est visible ??"
@@ -49,7 +49,7 @@ class CarteFideliteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentTravailBinding.inflate(inflater, container, false)
+        _binding = FragmentCarteFideliteBinding.inflate(inflater, container, false)
 
         return binding.root
     }

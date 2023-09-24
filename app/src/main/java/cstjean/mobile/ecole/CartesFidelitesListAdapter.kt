@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import cstjean.mobile.ecole.databinding.ListItemTravailBinding
+import cstjean.mobile.ecole.databinding.ListItemCarteFideliteBinding
 import cstjean.mobile.ecole.travail.Travail
 
 /**
@@ -15,7 +15,7 @@ import cstjean.mobile.ecole.travail.Travail
  *
  * @author Gabriel T. St-Hilaire
  */
-class TravailHolder(private val binding: ListItemTravailBinding) :
+class TravailHolder(private val binding: ListItemCarteFideliteBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     /**
@@ -56,7 +56,7 @@ class TravauxListAdapter(private val travaux: List<Travail>) :
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravailHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ListItemTravailBinding.inflate(inflater, parent, false)
+        val binding = ListItemCarteFideliteBinding.inflate(inflater, parent, false)
         return TravailHolder(binding)
     }
 
