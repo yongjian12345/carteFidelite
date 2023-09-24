@@ -24,12 +24,12 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
      * @param carteFidelite Le travail associé.
      */
     fun bind(carteFidelite: CarteFidelite) {
-        binding.travailNom.text = carteFidelite.nom
+        binding.travailNom.text = carteFidelite.nomCommerce
         binding.travailDate.text = carteFidelite.dateRemise.toString()
         binding.travailTermine.visibility = if (carteFidelite.estTermine) View.VISIBLE else View.GONE
 
         binding.root.setOnClickListener {
-            Toast.makeText(binding.root.context, carteFidelite.nom, Toast.LENGTH_SHORT)
+            Toast.makeText(binding.root.context, carteFidelite.nomCommerce, Toast.LENGTH_SHORT)
                 .show()
         }
     }

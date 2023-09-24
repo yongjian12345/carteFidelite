@@ -65,7 +65,7 @@ class CarteFideliteFragment : Fragment() {
 
         binding.apply {
             travailNom.doOnTextChanged { text, _, _, _ ->
-                carteFidelite = carteFidelite.copy(nom = text.toString())
+                carteFidelite = carteFidelite.copy(nomCommerce = text.toString())
             }
 
             travailTermine.setOnCheckedChangeListener { _, isChecked ->
