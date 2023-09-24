@@ -15,7 +15,7 @@ import cstjean.mobile.ecole.travail.CarteFidelite
  *
  * @author Gabriel T. St-Hilaire
  */
-class TravailHolder(private val binding: ListItemCarteFideliteBinding) :
+class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     /**
@@ -38,12 +38,12 @@ class TravailHolder(private val binding: ListItemCarteFideliteBinding) :
 /**
  * Adapter pour notre RecyclerView de travaux.
  *
- * @property travaux Liste des travaux à afficher.
+ * @property cartesFidelites Liste des travaux à afficher.
  *
  * @author Gabriel T. St-Hilaire
  */
-class TravauxListAdapter(private val travaux: List<CarteFidelite>) :
-    RecyclerView.Adapter<TravailHolder>() {
+class CarteFideliteListAdapter(private val cartesFidelites: List<CarteFidelite>) :
+    RecyclerView.Adapter<CarteFideliteHolder>() {
 
     /**
      * Lors de la création des ViewHolder.
@@ -54,10 +54,10 @@ class TravauxListAdapter(private val travaux: List<CarteFidelite>) :
      *
      * @return Un ViewHolder pour notre cellule.
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TravailHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarteFideliteHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ListItemCarteFideliteBinding.inflate(inflater, parent, false)
-        return TravailHolder(binding)
+        return CarteFideliteHolder(binding)
     }
 
     /**
@@ -66,9 +66,9 @@ class TravauxListAdapter(private val travaux: List<CarteFidelite>) :
      * @param holder Le ViewHolder à utiliser.
      * @param position La position dans la liste qu'on souhaite utiliser.
      */
-    override fun onBindViewHolder(holder: TravailHolder, position: Int) {
-        val travail = travaux[position]
-        holder.bind(travail)
+    override fun onBindViewHolder(holder: CarteFideliteHolder, position: Int) {
+        val carteFidelite = cartesFidelites[position]
+        holder.bind(carteFidelite)
     }
 
     /**
@@ -76,5 +76,5 @@ class TravauxListAdapter(private val travaux: List<CarteFidelite>) :
      *
      * @return Le nombre d'item total de notre liste.
      */
-    override fun getItemCount() = travaux.size
+    override fun getItemCount() = cartesFidelites.size
 }

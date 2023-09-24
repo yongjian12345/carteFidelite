@@ -33,7 +33,7 @@ class CartesFidelitesListFragment : Fragment() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "Travaux : ${cartesFidelitesListViewModel.travaux.size}")
+        Log.d(TAG, "Travaux : ${cartesFidelitesListViewModel.cartesFidelites.size}")
     }
 
     /**
@@ -54,8 +54,8 @@ class CartesFidelitesListFragment : Fragment() {
 
         binding.travauxRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        val travaux = cartesFidelitesListViewModel.travaux
-        val adapter = TravauxListAdapter(travaux)
+        val cartesFidelites = cartesFidelitesListViewModel.cartesFidelites
+        val adapter = CarteFideliteListAdapter(cartesFidelites)
         binding.travauxRecyclerView.adapter = adapter
 
         return binding.root
