@@ -33,7 +33,7 @@ class CartesFidelitesListFragment : Fragment() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "Travaux : ${cartesFidelitesListViewModel.cartesFidelites.size}")
+        Log.d(TAG, "Cartes Fidélités : ${cartesFidelitesListViewModel.cartesFidelites.size}")
     }
 
     /**
@@ -52,11 +52,11 @@ class CartesFidelitesListFragment : Fragment() {
     ): View {
         _binding = FragmentCartesFidelitesListBinding.inflate(inflater, container, false)
 
-        binding.travauxRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.cartesFidelitesRecyclerView.layoutManager = LinearLayoutManager(context)
 
         val cartesFidelites = cartesFidelitesListViewModel.cartesFidelites
         val adapter = CarteFideliteListAdapter(cartesFidelites)
-        binding.travauxRecyclerView.adapter = adapter
+        binding.cartesFidelitesRecyclerView.adapter = adapter
 
         return binding.root
     }
