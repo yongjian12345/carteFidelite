@@ -1,7 +1,7 @@
 package cstjean.mobile.ecole
 
 import androidx.lifecycle.ViewModel
-import cstjean.mobile.ecole.travail.Travail
+import cstjean.mobile.ecole.travail.CarteFidelite
 import java.util.Date
 import java.util.UUID
 
@@ -13,12 +13,12 @@ import java.util.UUID
  * @author Gabriel T. St-Hilaire
  */
 class CartesFidelitesListViewModel : ViewModel() {
-    val travaux = mutableListOf<Travail>()
+    val travaux = mutableListOf<CarteFidelite>()
 
     init {
         // Données de tests
         for (i in 0 until 100) {
-            travaux += Travail(
+            travaux += CarteFidelite(
                 UUID.randomUUID(),
                 "Travail #$i",
                 Date(),

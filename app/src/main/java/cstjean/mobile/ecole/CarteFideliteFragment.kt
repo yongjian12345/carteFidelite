@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import cstjean.mobile.ecole.databinding.FragmentCarteFideliteBinding
-import cstjean.mobile.ecole.travail.Travail
+import cstjean.mobile.ecole.travail.CarteFidelite
 import java.util.Date
 import java.util.UUID
 
@@ -23,7 +23,7 @@ class CarteFideliteFragment : Fragment() {
             "Binding est null. La vue est visible ??"
         }
 
-    private lateinit var travail: Travail
+    private lateinit var carteFidelite: CarteFidelite
 
     /**
      * Initialisation du Fragment.
@@ -33,7 +33,7 @@ class CarteFideliteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        travail = Travail(UUID.randomUUID(), "Travail 1", Date(),false)
+        carteFidelite = CarteFidelite(UUID.randomUUID(), "Travail 1", Date(),false)
     }
 
     /**
@@ -65,15 +65,15 @@ class CarteFideliteFragment : Fragment() {
 
         binding.apply {
             travailNom.doOnTextChanged { text, _, _, _ ->
-                travail = travail.copy(nom = text.toString())
+                carteFidelite = carteFidelite.copy(nom = text.toString())
             }
 
             travailTermine.setOnCheckedChangeListener { _, isChecked ->
-                travail = travail.copy(estTermine = isChecked)
+                carteFidelite = carteFidelite.copy(estTermine = isChecked)
             }
 
             travailDate.apply {
-                text = travail.dateRemise.toString()
+                text = carteFidelite.dateRemise.toString()
                 isEnabled = false
             }
         }

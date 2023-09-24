@@ -13,4 +13,4 @@ import java.util.UUID
  *
  * @author Gabriel T. St-Hilaire
  */
-data class Travail(val id: UUID, val nom: String, val dateRemise: Date, val estTermine: Boolean)
+data class CarteFidelite(val id: UUID, val nom: String, val dateRemise: Date, val estTermine: Boolean)
