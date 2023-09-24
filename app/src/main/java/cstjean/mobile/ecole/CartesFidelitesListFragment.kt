@@ -17,14 +17,14 @@ private const val TAG = "TravauxListFragment"
  *
  * @author Gabriel T. St-Hilaire
  */
-class CarteFideliteListFragment : Fragment() {
+class CartesFidelitesListFragment : Fragment() {
     private var _binding: FragmentTravauxListBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
             "Binding est null. La vue est visible ??"
         }
 
-    private val carteFideliteListViewModel: CarteFideliteListViewModel by viewModels()
+    private val cartesFidelitesListViewModel: CartesFidelitesListViewModel by viewModels()
 
     /**
      * Initialisation du Fragment.
@@ -33,7 +33,7 @@ class CarteFideliteListFragment : Fragment() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "Travaux : ${carteFideliteListViewModel.travaux.size}")
+        Log.d(TAG, "Travaux : ${cartesFidelitesListViewModel.travaux.size}")
     }
 
     /**
@@ -54,7 +54,7 @@ class CarteFideliteListFragment : Fragment() {
 
         binding.travauxRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        val travaux = carteFideliteListViewModel.travaux
+        val travaux = cartesFidelitesListViewModel.travaux
         val adapter = TravauxListAdapter(travaux)
         binding.travauxRecyclerView.adapter = adapter
 
