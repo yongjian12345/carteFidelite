@@ -16,7 +16,7 @@ import java.util.UUID
  *
  * @author Gabriel T. St-Hilaire
  */
-class TravailFragment : Fragment() {
+class CarteFideliteFragment : Fragment() {
     private var _binding: FragmentTravailBinding? = null
     private val binding
         get() = checkNotNull(_binding) {

@@ -12,7 +12,7 @@ import java.util.UUID
  *
  * @author Gabriel T. St-Hilaire
  */
-class TravauxListViewModel : ViewModel() {
+class CarteFideliteListViewModel : ViewModel() {
     val travaux = mutableListOf<Travail>()
 
     init {
