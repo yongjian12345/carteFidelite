@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import cstjean.mobile.ecole.databinding.FragmentCartesFidelitesListBinding
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.launch
 
 private const val TAG = "TravauxListFragment"
 
@@ -26,15 +30,8 @@ class CartesFidelitesListFragment : Fragment() {
 
     private val cartesFidelitesListViewModel: CartesFidelitesListViewModel by viewModels()
 
-    /**
-     * Initialisation du Fragment.
-     *
-     * @param savedInstanceState Les données conservées au changement d'état.
-     */
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d(TAG, "Cartes Fidélités : ${cartesFidelitesListViewModel.cartesFidelites.size}")
-    }
+
+
 
     /**
      * Instanciation de l'interface.
@@ -54,11 +51,19 @@ class CartesFidelitesListFragment : Fragment() {
 
         binding.cartesFidelitesRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        val cartesFidelites = cartesFidelitesListViewModel.cartesFidelites
-        val adapter = CarteFideliteListAdapter(cartesFidelites)
-        binding.cartesFidelitesRecyclerView.adapter = adapter
+
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                val cartesFidelites = cartesFidelitesListViewModel.loadCartesFidelites()
+                binding.cartesFidelitesRecyclerView.adapter = CarteFideliteListAdapter(cartesFidelites)
+            }
+        }
     }
 
     /**
