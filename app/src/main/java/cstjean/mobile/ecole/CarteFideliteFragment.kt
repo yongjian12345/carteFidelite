@@ -33,7 +33,7 @@ class CarteFideliteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        carteFidelite = CarteFidelite(UUID.randomUUID(), "Travail 1", Date(),false)
+        carteFidelite = CarteFidelite(UUID.randomUUID(), "Travail 1", "Rouge", Commerce.RESTAURANT,Date(),false)
     }
 
     /**

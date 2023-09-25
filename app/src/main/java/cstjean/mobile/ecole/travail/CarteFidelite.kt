@@ -1,5 +1,8 @@
 package cstjean.mobile.ecole.travail
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import cstjean.mobile.ecole.Commerce
 import java.util.Date
 import java.util.UUID
 
@@ -13,4 +16,11 @@ import java.util.UUID
  *
  * @author Gabriel T. St-Hilaire
  */
-data class CarteFidelite(val id: UUID, val nomCommerce: String, val dateRemise: Date, val estTermine: Boolean)
+@Entity
+data class CarteFidelite(
+    @PrimaryKey val id: UUID,
+    val nomCommerce: String,
+    val couleurBG: String,
+    val typeCommerce: Commerce,
+    val dateRemise: Date,
+    val estTermine: Boolean)
