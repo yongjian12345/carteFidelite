@@ -12,7 +12,7 @@ import java.util.Date
 import java.util.UUID
 
 /**
- * Fragment pour la gestion d'un travail.
+ * Fragment pour la gestion d'un travail ou écran modifier.
  *
  * @author Gabriel T. St-Hilaire
  */
@@ -33,7 +33,7 @@ class CarteFideliteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        carteFidelite = CarteFidelite(UUID.randomUUID(), "Travail 1", "Rouge", Commerce.RESTAURANT)
+        carteFidelite = CarteFidelite(UUID.randomUUID(), "Travail 1", "Rouge", Commerce.RESTAURANT, 3)
     }
 
     /**

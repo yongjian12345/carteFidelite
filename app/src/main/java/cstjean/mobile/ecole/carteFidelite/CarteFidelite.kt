@@ -3,7 +3,6 @@ package cstjean.mobile.ecole.carteFidelite
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import cstjean.mobile.ecole.Commerce
-import java.util.Date
 import java.util.UUID
 
 /**
@@ -21,4 +20,5 @@ data class CarteFidelite(
     @PrimaryKey val id: UUID,
     val nomCommerce: String,
     val couleurBG: String,
-    val typeCommerce: Commerce)
+    val typeCommerce: Commerce,
+    val numeroCarte: Int)

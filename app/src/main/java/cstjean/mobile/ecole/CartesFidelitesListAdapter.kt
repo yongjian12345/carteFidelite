@@ -26,7 +26,7 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
     fun bind(carteFidelite: CarteFidelite) {
         binding.carteFideliteNomCommerce.text = carteFidelite.nomCommerce
         binding.carteFideliteCouleur.text = carteFidelite.couleurBG
-        binding.carteFideliteNumero.text = carteFidelite.nomCommerce
+        binding.carteFideliteNumero.text = carteFidelite.numeroCarte.toString()
         binding.carteFideliteType.text = carteFidelite.typeCommerce.toString()
 
 

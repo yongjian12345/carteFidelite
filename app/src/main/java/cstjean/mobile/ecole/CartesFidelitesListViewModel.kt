@@ -23,6 +23,7 @@ class CartesFidelitesListViewModel : ViewModel() {
                 "Carte #$i",
                 "Rouge",
                 Commerce.RESTAURANT,
+                3
             )
         }
     }
