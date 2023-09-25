@@ -6,6 +6,9 @@ import cstjean.mobile.ecole.carteFidelite.CarteFidelite
 
 import kotlinx.coroutines.launch
 import java.util.UUID
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+
 
 private const val TAG = "CartesFidelitesListViewModel"
 
@@ -18,10 +21,16 @@ private const val TAG = "CartesFidelitesListViewModel"
  */
 class CartesFidelitesListViewModel : ViewModel() {
     private val cartesFidelitesRepository = CarteFideliteRepository.get()
-    val cartesFidelites = cartesFidelitesRepository.getCartesFidelites()
+
+    private val _cartesFidelites: MutableStateFlow<List<CarteFidelite>> = MutableStateFlow(emptyList())
+    val cartesFidelites: StateFlow<List<CarteFidelite>> = _cartesFidelites
     init {
         viewModelScope.launch {
             loadCartesFidelites()
+
+            cartesFidelitesRepository.getCartesFidelites().collect {
+                _cartesFidelites.value = it
+            }
         }
     }
 
