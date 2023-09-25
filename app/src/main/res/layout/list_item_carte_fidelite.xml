@@ -8,34 +8,49 @@
     android:layout_margin="16dp">
 
     <TextView
-        android:id="@+id/travail_nom"
+        android:id="@+id/carteFideliteNomCommerce"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/travail_termine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="NOM" />
 
     <TextView
-        android:id="@+id/travail_date"
+        android:id="@+id/carteFideliteNumero"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/travail_nom"
-        app:layout_constraintStart_toStartOf="@+id/travail_nom"
-        app:layout_constraintTop_toBottomOf="@+id/travail_nom"
+        app:layout_constraintEnd_toEndOf="@+id/carteFideliteNomCommerce"
+        app:layout_constraintStart_toStartOf="@+id/carteFideliteNomCommerce"
+        app:layout_constraintTop_toBottomOf="@+id/carteFideliteNomCommerce"
         tools:text="DATE" />
 
-    <ImageView
-        android:id="@+id/travail_termine"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/carteFideliteCouleur"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/carteFideliteType"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_done_24"
-        android:contentDescription="@string/travail_termine_description" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="Couleur" />
+
+    <TextView
+        android:id="@+id/carteFideliteType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/carteFideliteNumero"
+        tools:text="Type" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

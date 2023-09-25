@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import cstjean.mobile.ecole.databinding.ListItemCarteFideliteBinding
-import cstjean.mobile.ecole.travail.CarteFidelite
+import cstjean.mobile.ecole.carteFidelite.CarteFidelite
 
 /**
  * ViewHolder pour notre RecyclerView de travaux.
@@ -24,9 +24,11 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
      * @param carteFidelite Le travail associé.
      */
     fun bind(carteFidelite: CarteFidelite) {
-        binding.travailNom.text = carteFidelite.nomCommerce
-        binding.travailDate.text = carteFidelite.dateRemise.toString()
-        binding.travailTermine.visibility = if (carteFidelite.estTermine) View.VISIBLE else View.GONE
+        binding.carteFideliteNomCommerce.text = carteFidelite.nomCommerce
+        binding.carteFideliteCouleur.text = carteFidelite.couleurBG
+        binding.carteFideliteNumero.text = carteFidelite.nomCommerce
+        binding.carteFideliteType.text = carteFidelite.typeCommerce.toString()
+
 
         binding.root.setOnClickListener {
             Toast.makeText(binding.root.context, carteFidelite.nomCommerce, Toast.LENGTH_SHORT)

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import cstjean.mobile.ecole.databinding.FragmentCarteFideliteBinding
-import cstjean.mobile.ecole.travail.CarteFidelite
+import cstjean.mobile.ecole.carteFidelite.CarteFidelite
 import java.util.Date
 import java.util.UUID
 
@@ -33,7 +33,7 @@ class CarteFideliteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        carteFidelite = CarteFidelite(UUID.randomUUID(), "Travail 1", "Rouge", Commerce.RESTAURANT,Date(),false)
+        carteFidelite = CarteFidelite(UUID.randomUUID(), "Travail 1", "Rouge", Commerce.RESTAURANT)
     }
 
     /**
@@ -67,13 +67,14 @@ class CarteFideliteFragment : Fragment() {
             travailNom.doOnTextChanged { text, _, _, _ ->
                 carteFidelite = carteFidelite.copy(nomCommerce = text.toString())
             }
-
+/*
             travailTermine.setOnCheckedChangeListener { _, isChecked ->
                 carteFidelite = carteFidelite.copy(estTermine = isChecked)
-            }
+            }*/
 
+            // il ajoute les text
             travailDate.apply {
-                text = carteFidelite.dateRemise.toString()
+                text = carteFidelite.couleurBG.toString()
                 isEnabled = false
             }
         }

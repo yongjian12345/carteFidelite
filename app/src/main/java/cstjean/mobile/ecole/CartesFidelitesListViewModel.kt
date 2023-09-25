@@ -1,7 +1,7 @@
 package cstjean.mobile.ecole
 
 import androidx.lifecycle.ViewModel
-import cstjean.mobile.ecole.travail.CarteFidelite
+import cstjean.mobile.ecole.carteFidelite.CarteFidelite
 import java.util.Date
 import java.util.UUID
 
@@ -20,9 +20,9 @@ class CartesFidelitesListViewModel : ViewModel() {
         for (i in 0 until 100) {
             cartesFidelites += CarteFidelite(
                 UUID.randomUUID(),
-                "Travail #$i",
-                Date(),
-                i % 2 == 0
+                "Carte #$i",
+                "Rouge",
+                Commerce.RESTAURANT,
             )
         }
     }
