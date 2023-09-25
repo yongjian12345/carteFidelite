@@ -3,7 +3,9 @@ import android.content.Context
 import androidx.room.Room
 import cstjean.mobile.ecole.database.CarteFideliteDatabase
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
+import kotlinx.coroutines.flow.Flow
 import java.util.UUID
+
 private const val DATABASE_NAME = "carteFidelite-database"
 
 class CarteFideliteRepository private constructor(context: Context) {
@@ -14,8 +16,8 @@ class CarteFideliteRepository private constructor(context: Context) {
             DATABASE_NAME
         ).build()
 
-    suspend fun getTravaux(): List<CarteFidelite> = database.carteFideliteDao().getTravaux()
-    suspend fun getTravail(id: UUID): CarteFidelite = database.carteFideliteDao().getTravail(id)
+    fun getCartesFidelites(): Flow<List<CarteFidelite>> = database.carteFideliteDao().getTravaux()
+    suspend fun getCarteFidelite(id: UUID): CarteFidelite = database.carteFideliteDao().getTravail(id)
 
     suspend fun addCarteFidelite(carteFidelite: CarteFidelite) {
         database.carteFideliteDao().addCarteFidelite(carteFidelite)

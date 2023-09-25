@@ -60,8 +60,9 @@ class CartesFidelitesListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                val cartesFidelites = cartesFidelitesListViewModel.loadCartesFidelites()
-                binding.cartesFidelitesRecyclerView.adapter = CarteFideliteListAdapter(cartesFidelites)
+                cartesFidelitesListViewModel.cartesFidelites.collect {cartesFidelite ->
+                    binding.cartesFidelitesRecyclerView.adapter = CarteFideliteListAdapter(cartesFidelite)
+                }
             }
         }
     }

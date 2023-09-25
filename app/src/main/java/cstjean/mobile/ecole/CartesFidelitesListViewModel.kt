@@ -1,14 +1,12 @@
 package cstjean.mobile.ecole
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
-import java.util.Date
+
+import kotlinx.coroutines.launch
 import java.util.UUID
 
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 private const val TAG = "CartesFidelitesListViewModel"
 
 /**
@@ -20,16 +18,16 @@ private const val TAG = "CartesFidelitesListViewModel"
  */
 class CartesFidelitesListViewModel : ViewModel() {
     private val cartesFidelitesRepository = CarteFideliteRepository.get()
+    val cartesFidelites = cartesFidelitesRepository.getCartesFidelites()
     init {
         viewModelScope.launch {
-
+            loadCartesFidelites()
         }
     }
 
 
-    suspend fun loadCartesFidelites(): List<CarteFidelite> {
-// Données de tests
-      /*  for (i in 0 until 100) {
+    suspend fun loadCartesFidelites() {
+        for (i in 0 until 100) {
             val carteFidelite = CarteFidelite(
                 UUID.randomUUID(),
                 "Carte #$i",
@@ -38,8 +36,8 @@ class CartesFidelitesListViewModel : ViewModel() {
                 3
             )
             addCarteFidelite(carteFidelite)
-        }*/
-        return cartesFidelitesRepository.getTravaux()
+        }
+
     }
 
     suspend fun addCarteFidelite(carteFidelite: CarteFidelite) {
