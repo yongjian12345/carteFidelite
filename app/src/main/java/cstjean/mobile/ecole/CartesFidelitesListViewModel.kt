@@ -13,18 +13,20 @@ import java.util.UUID
  * @author Gabriel T. St-Hilaire
  */
 class CartesFidelitesListViewModel : ViewModel() {
-    val cartesFidelites = mutableListOf<CarteFidelite>()
+    private val cartesFidelitesRepository = CarteFideliteRepository.get()
+    val cartesFidelites = cartesFidelitesRepository.getTravaux()
 
-    init {
-        // Données de tests
-        for (i in 0 until 100) {
-            cartesFidelites += CarteFidelite(
-                UUID.randomUUID(),
-                "Carte #$i",
-                "Rouge",
-                Commerce.RESTAURANT,
-                3
-            )
-        }
-    }
+    /*init {
+
+      // Données de tests
+      for (i in 0 until 100) {
+          cartesFidelites += CarteFidelite(
+              UUID.randomUUID(),
+              "Carte #$i",
+              "Rouge",
+              Commerce.RESTAURANT,
+              3
+          )
+      }
+    }*/
 }
