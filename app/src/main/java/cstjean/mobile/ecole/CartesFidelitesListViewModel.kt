@@ -19,29 +19,30 @@ private const val TAG = "CartesFidelitesListViewModel"
  * @author Gabriel T. St-Hilaire
  */
 class CartesFidelitesListViewModel : ViewModel() {
-    val cartesFidelites = mutableListOf<CarteFidelite>()
+    private val cartesFidelitesRepository = CarteFideliteRepository.get()
     init {
         viewModelScope.launch {
-            Log.d(TAG, "Coroutine launched")
-            cartesFidelites += loadCartesFidelites()
-            Log.d(TAG, "Coroutine finished")
+
         }
     }
 
 
     suspend fun loadCartesFidelites(): List<CarteFidelite> {
-        val cartesFidelites = mutableListOf<CarteFidelite>()
-        delay(5000)
 // Données de tests
-        for (i in 0 until 100) {
-            cartesFidelites += CarteFidelite(
+      /*  for (i in 0 until 100) {
+            val carteFidelite = CarteFidelite(
                 UUID.randomUUID(),
                 "Carte #$i",
                 "Rouge",
                 Commerce.RESTAURANT,
                 3
             )
-        }
-        return cartesFidelites
+            addCarteFidelite(carteFidelite)
+        }*/
+        return cartesFidelitesRepository.getTravaux()
+    }
+
+    suspend fun addCarteFidelite(carteFidelite: CarteFidelite) {
+        cartesFidelitesRepository.addCarteFidelite(carteFidelite)
     }
 }

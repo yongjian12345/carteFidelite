@@ -14,8 +14,12 @@ class CarteFideliteRepository private constructor(context: Context) {
             DATABASE_NAME
         ).build()
 
-    fun getTravaux(): List<CarteFidelite> = database.carteFideliteDao().getTravaux()
-    fun getTravail(id: UUID): CarteFidelite = database.carteFideliteDao().getTravail(id)
+    suspend fun getTravaux(): List<CarteFidelite> = database.carteFideliteDao().getTravaux()
+    suspend fun getTravail(id: UUID): CarteFidelite = database.carteFideliteDao().getTravail(id)
+
+    suspend fun addCarteFidelite(carteFidelite: CarteFidelite) {
+        database.carteFideliteDao().addCarteFidelite(carteFidelite)
+    }
 
     companion object {
         private var INSTANCE: CarteFideliteRepository? = null
