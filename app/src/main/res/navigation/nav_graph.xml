@@ -11,13 +11,14 @@
         android:label="CartesFidelitesListFragment"
         tools:layout="@layout/fragment_cartes_fidelites_list">
         <action
-            android:id="@+id/show_travail_detail"
+            android:id="@+id/show_carte_fidelite_detail"
             app:destination="@id/carteFideliteFragment" />
     </fragment>
     <fragment
         android:id="@+id/carteFideliteFragment"
         android:name="cstjean.mobile.ecole.CarteFideliteFragment"
         android:label="CarteFideliteFragment"
-        tools:layout="@layout/fragment_carte_fidelite"/>
+        tools:layout="@layout/fragment_carte_fidelite">
     <argument android:name="carteFideliteId" app:argType="java.util.UUID"/>
+    </fragment>
 </navigation>

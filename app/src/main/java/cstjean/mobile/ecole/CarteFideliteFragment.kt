@@ -14,8 +14,6 @@ import androidx.navigation.fragment.navArgs
 import cstjean.mobile.ecole.databinding.FragmentCarteFideliteBinding
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
 import kotlinx.coroutines.launch
-import java.util.Date
-import java.util.UUID
 
 /**
  * Fragment pour la gestion d'un travail ou écran modifier.
@@ -30,10 +28,10 @@ class CarteFideliteFragment : Fragment() {
         }
 
     private val args: CarteFideliteFragmentArgs by navArgs()
-    private val travailViewModel: CarteFideliteViewModel by viewModels {
-        CarteFideliteViewModelFactory(args.travailId)
+    private val carteFideliteViewModel: CarteFideliteViewModel by viewModels {
+        CarteFideliteViewModelFactory(args.carteFideliteId)
     }
-
+    // Supprimer la variable travail et le onCreate
     /**
      * Instanciation de l'interface.
      *
@@ -63,7 +61,7 @@ class CarteFideliteFragment : Fragment() {
 
         binding.apply {
             travailNom.doOnTextChanged { text, _, _, _ ->
-                travailViewModel.updateTravail { oldTravail ->
+                carteFideliteViewModel.updateTravail { oldTravail ->
                     oldTravail.copy(nom = text.toString())
                 }
             }
@@ -83,12 +81,13 @@ class CarteFideliteFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                travailViewModel.travail.collect { travail ->
-                    travail?.let { updateUi(it) }
+                carteFideliteViewModel.carteFidelite.collect { carteFidelite ->
+                    carteFidelite?.let { updateUi(it) }
                 }
             }
         }
     }
+    /*
 
     private fun updateUi( carteFidelite: CarteFidelite) {
         binding.apply {
@@ -101,7 +100,7 @@ class CarteFideliteFragment : Fragment() {
             travailTermine.isChecked = travail.estTermine
         }
     }
-
+*/
     /**
      * Lorsque la vue est détruite.
      */

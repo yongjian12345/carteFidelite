@@ -9,10 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.flow.update
 import java.util.UUID
 
-class CarteFideliteViewModel : ViewModel( carteFideliteId: UUID) {
+class CarteFideliteViewModel( carteFideliteId : UUID) : ViewModel() {
     private val carteFideliteRepository = CarteFideliteRepository.get()
     private val _carteFidelite: MutableStateFlow<CarteFidelite?> = MutableStateFlow(null)
-    val travail: StateFlow<CarteFidelite?> = _carteFidelite
+        val carteFidelite: StateFlow<CarteFidelite?> = _carteFidelite
 
     init {
         viewModelScope.launch {
