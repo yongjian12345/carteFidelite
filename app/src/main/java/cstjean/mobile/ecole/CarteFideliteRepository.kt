@@ -3,12 +3,17 @@ import android.content.Context
 import androidx.room.Room
 import cstjean.mobile.ecole.database.CarteFideliteDatabase
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import java.util.UUID
 
 private const val DATABASE_NAME = "carteFidelite-database"
 
-class CarteFideliteRepository private constructor(context: Context) {
+class CarteFideliteRepository private constructor(
+    context: Context,
+    private val coroutineScope: CoroutineScope = GlobalScope) {
     private val database: CarteFideliteDatabase = Room
         .databaseBuilder(
             context.applicationContext,
@@ -16,8 +21,14 @@ class CarteFideliteRepository private constructor(context: Context) {
             DATABASE_NAME
         ).build()
 
-    fun getCartesFidelites(): Flow<List<CarteFidelite>> = database.carteFideliteDao().getTravaux()
-    suspend fun getCarteFidelite(id: UUID): CarteFidelite = database.carteFideliteDao().getTravail(id)
+    fun updateTravail(carteFidelite: CarteFidelite) {
+        coroutineScope.launch {
+            database.carteFideliteDao().updateCarteFidelite(carteFidelite)
+        }
+    }
+
+    fun getCartesFidelites(): Flow<List<CarteFidelite>> = database.carteFideliteDao().getCartesFidelites()
+    suspend fun getCarteFidelite(id: UUID): CarteFidelite = database.carteFideliteDao().getCarteFidelite(id)
 
     suspend fun addCarteFidelite(carteFidelite: CarteFidelite) {
         database.carteFideliteDao().addCarteFidelite(carteFidelite)

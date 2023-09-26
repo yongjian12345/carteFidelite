@@ -58,24 +58,34 @@ class CarteFideliteFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /*carteFideliteNumeroCarte.setText(carteFidelite.numeroCarte.toString())
+    }
+    carteFideliteNomCommerce.setText(carteFidelite.nomCommerce)
+    carteFideliteCouleur.setText(carteFidelite.couleurBG)
+    carteFideliteTypeCommerce.setText(carteFidelite.typeCommerce.toString())*/
+
 
         binding.apply {
-            travailNom.doOnTextChanged { text, _, _, _ ->
-                carteFideliteViewModel.updateTravail { oldTravail ->
-                    oldTravail.copy(nom = text.toString())
+            carteFideliteNumeroCarte.doOnTextChanged { text, _, _, _ ->
+                carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
+                    oldCarteFidelite.copy(numeroCarte = text.toString().toInt())
                 }
             }
-/*
-            travailTermine.setOnCheckedChangeListener { _, isChecked ->
-               travailViewModel.updateTravail { oldTravail ->
- oldTravail.copy(estTermine = isChecked)
- }
-            }*/
+            carteFideliteNomCommerce.doOnTextChanged { text, _, _, _ ->
+                carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
+                    oldCarteFidelite.copy(nomCommerce = text.toString())
+                }
+            }
+            carteFideliteCouleur.doOnTextChanged { text, _, _, _ ->
+                carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
+                    oldCarteFidelite.copy(couleurBG = text.toString())
+                }
+            }
 
-            // il ajoute les text
-            travailDate.apply {
-
-                isEnabled = false
+            carteFideliteTypeCommerce.doOnTextChanged { text, _, _, _ ->
+                carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
+                    oldCarteFidelite.copy(typeCommerce =  Commerce.valueOf(text.toString()))
+                }
             }
         }
 
@@ -87,20 +97,21 @@ class CarteFideliteFragment : Fragment() {
             }
         }
     }
-    /*
+
 
     private fun updateUi( carteFidelite: CarteFidelite) {
         binding.apply {
             // To DO convenablement
             // Pour éviter une loop infinie avec le update
-            if (travailNom.text.toString() != travail.nom) {
-                travailNom.setText(travail.nom)
+            if (carteFideliteNumeroCarte.text.toString() != carteFidelite.numeroCarte.toString()) {
+                carteFideliteNumeroCarte.setText(carteFidelite.numeroCarte.toString())
             }
-            travailDate.text = travail.dateRemise.toString()
-            travailTermine.isChecked = travail.estTermine
+            carteFideliteNomCommerce.setText(carteFidelite.nomCommerce)
+            carteFideliteCouleur.setText(carteFidelite.couleurBG)
+            carteFideliteTypeCommerce.setText(carteFidelite.typeCommerce.toString())
         }
     }
-*/
+
     /**
      * Lorsque la vue est détruite.
      */

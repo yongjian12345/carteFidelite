@@ -20,10 +20,15 @@ class CarteFideliteViewModel( carteFideliteId : UUID) : ViewModel() {
         }
     }
 
-    fun updateTravail(onUpdate: (CarteFidelite) -> CarteFidelite) {
+    fun updateCarteFidelite(onUpdate: (CarteFidelite) -> CarteFidelite) {
         _carteFidelite.update { oldCarteFidelite ->
             oldCarteFidelite?.let { onUpdate(it) }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        carteFidelite.value?.let { carteFideliteRepository.updateTravail(it) }
     }
 }
 

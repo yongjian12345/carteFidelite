@@ -64,7 +64,7 @@ class CartesFidelitesListFragment : Fragment() {
                 cartesFidelitesListViewModel.cartesFidelites.collect {cartesFidelite ->
                     binding.cartesFidelitesRecyclerView.adapter = CarteFideliteListAdapter(cartesFidelite) { cartefideliteId ->
                         Log.d(TAG, cartefideliteId.toString())
-                        findNavController().navigate(CartesFidelitesListFragmentDirections.showCarteFideliteDetail())
+                        findNavController().navigate(CartesFidelitesListFragmentDirections.showCarteFideliteDetail(cartefideliteId))
                     }
                 }
             }

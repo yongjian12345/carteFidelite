@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/travail_nom_hint"
-        android:inputType="text" />
+        android:inputType="number" />
     <TextView
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
