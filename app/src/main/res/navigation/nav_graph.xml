@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/cartesFidelitesListFragment">
+
+    <fragment
+        android:id="@+id/cartesFidelitesListFragment"
+        android:name="cstjean.mobile.ecole.CartesFidelitesListFragment"
+        android:label="CartesFidelitesListFragment"
+        tools:layout="@layout/fragment_cartes_fidelites_list">
+        <action
+            android:id="@+id/show_travail_detail"
+            app:destination="@id/carteFideliteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/carteFideliteFragment"
+        android:name="cstjean.mobile.ecole.CarteFideliteFragment"
+        android:label="CarteFideliteFragment"
+        tools:layout="@layout/fragment_carte_fidelite"/>
+    <argument android:name="carteFideliteId" app:argType="java.util.UUID"/>
+</navigation>

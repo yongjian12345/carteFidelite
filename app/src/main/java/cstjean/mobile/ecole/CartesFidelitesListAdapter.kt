@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import cstjean.mobile.ecole.databinding.ListItemCarteFideliteBinding
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
+import java.util.UUID
 
 /**
  * ViewHolder pour notre RecyclerView de travaux.
@@ -23,7 +24,7 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
      *
      * @param carteFidelite Le travail associé.
      */
-    fun bind(carteFidelite: CarteFidelite) {
+    fun bind(carteFidelite: CarteFidelite, onCarteFideliteClicked: (cartefideliteId: UUID) -> Unit) {
         binding.carteFideliteNomCommerce.text = carteFidelite.nomCommerce
         binding.carteFideliteCouleur.text = carteFidelite.couleurBG
         binding.carteFideliteNumero.text = carteFidelite.numeroCarte.toString()
@@ -31,8 +32,7 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
 
 
         binding.root.setOnClickListener {
-            Toast.makeText(binding.root.context, carteFidelite.nomCommerce, Toast.LENGTH_SHORT)
-                .show()
+            onCarteFideliteClicked(carteFidelite.id)
         }
     }
 }
@@ -44,7 +44,10 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
  *
  * @author Gabriel T. St-Hilaire
  */
-class CarteFideliteListAdapter(private val cartesFidelites: List<CarteFidelite>) :
+class CarteFideliteListAdapter(
+    private val cartesFidelites: List<CarteFidelite>,
+    private val onCarteFideliteClicked: (cartefideliteId: UUID) -> Unit
+) :
     RecyclerView.Adapter<CarteFideliteHolder>() {
 
     /**
@@ -70,7 +73,7 @@ class CarteFideliteListAdapter(private val cartesFidelites: List<CarteFidelite>)
      */
     override fun onBindViewHolder(holder: CarteFideliteHolder, position: Int) {
         val carteFidelite = cartesFidelites[position]
-        holder.bind(carteFidelite)
+        holder.bind(carteFidelite, onCarteFideliteClicked)
     }
 
     /**

@@ -6,8 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.navArgs
 import cstjean.mobile.ecole.databinding.FragmentCarteFideliteBinding
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
+import kotlinx.coroutines.launch
 import java.util.Date
 import java.util.UUID
 
@@ -23,17 +29,9 @@ class CarteFideliteFragment : Fragment() {
             "Binding est null. La vue est visible ??"
         }
 
-    private lateinit var carteFidelite: CarteFidelite
-
-    /**
-     * Initialisation du Fragment.
-     *
-     * @param savedInstanceState Les données conservées au changement d'état.
-     */
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        carteFidelite = CarteFidelite(UUID.randomUUID(), "Travail 1", "Rouge", Commerce.RESTAURANT, 3)
+    private val args: CarteFideliteFragmentArgs by navArgs()
+    private val travailViewModel: CarteFideliteViewModel by viewModels {
+        CarteFideliteViewModelFactory(args.travailId)
     }
 
     /**
@@ -65,18 +63,42 @@ class CarteFideliteFragment : Fragment() {
 
         binding.apply {
             travailNom.doOnTextChanged { text, _, _, _ ->
-                carteFidelite = carteFidelite.copy(nomCommerce = text.toString())
+                travailViewModel.updateTravail { oldTravail ->
+                    oldTravail.copy(nom = text.toString())
+                }
             }
 /*
             travailTermine.setOnCheckedChangeListener { _, isChecked ->
-                carteFidelite = carteFidelite.copy(estTermine = isChecked)
+               travailViewModel.updateTravail { oldTravail ->
+ oldTravail.copy(estTermine = isChecked)
+ }
             }*/
 
             // il ajoute les text
             travailDate.apply {
-                text = carteFidelite.couleurBG.toString()
+
                 isEnabled = false
             }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                travailViewModel.travail.collect { travail ->
+                    travail?.let { updateUi(it) }
+                }
+            }
+        }
+    }
+
+    private fun updateUi( carteFidelite: CarteFidelite) {
+        binding.apply {
+            // To DO convenablement
+            // Pour éviter une loop infinie avec le update
+            if (travailNom.text.toString() != travail.nom) {
+                travailNom.setText(travail.nom)
+            }
+            travailDate.text = travail.dateRemise.toString()
+            travailTermine.isChecked = travail.estTermine
         }
     }
 

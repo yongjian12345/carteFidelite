@@ -12,6 +12,7 @@ import cstjean.mobile.ecole.databinding.FragmentCartesFidelitesListBinding
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.launch
 
 private const val TAG = "TravauxListFragment"
@@ -61,7 +62,10 @@ class CartesFidelitesListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 cartesFidelitesListViewModel.cartesFidelites.collect {cartesFidelite ->
-                    binding.cartesFidelitesRecyclerView.adapter = CarteFideliteListAdapter(cartesFidelite)
+                    binding.cartesFidelitesRecyclerView.adapter = CarteFideliteListAdapter(cartesFidelite) { cartefideliteId ->
+                        Log.d(TAG, cartefideliteId.toString())
+                        findNavController().navigate(CartesFidelitesListFragmentDirections.showTravailDetail(cartefideliteId))
+                    }
                 }
             }
         }

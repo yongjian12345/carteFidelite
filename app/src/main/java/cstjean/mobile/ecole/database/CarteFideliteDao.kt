@@ -5,6 +5,7 @@ import androidx.room.Query
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
+import androidx.room.Update
 @Dao
 interface CarteFideliteDao {
     @Query("SELECT * FROM carteFidelite")
@@ -14,4 +15,7 @@ interface CarteFideliteDao {
 
     @Insert
     suspend fun addCarteFidelite(carteFidelite: CarteFidelite)
+
+    @Update
+    suspend fun updateTravail(carteFidelite: CarteFidelite)
 }
