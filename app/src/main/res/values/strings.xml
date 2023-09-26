@@ -9,4 +9,5 @@
     <string name="carte_fidelite_numero_carte"> Numéro de la carte</string>
     <string name="carte_fidelite_type_commerce">Type de Commerce</string>
     <string name="carte_fidelite_couleur">Couleur</string>
+    <string name="carte_fidelite_ajouter">Ajouter une carte de fidélité</string>
 </resources>

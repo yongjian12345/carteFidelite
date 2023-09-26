@@ -36,6 +36,7 @@ class CartesFidelitesListViewModel : ViewModel() {
 
 
     suspend fun loadCartesFidelites() {
+/*
         for (i in 0 until 100) {
             val carteFidelite = CarteFidelite(
                 UUID.randomUUID(),
@@ -45,7 +46,7 @@ class CartesFidelitesListViewModel : ViewModel() {
                 3
             )
             addCarteFidelite(carteFidelite)
-        }
+        }*/
 
     }
 
