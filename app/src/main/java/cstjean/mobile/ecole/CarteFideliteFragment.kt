@@ -103,10 +103,10 @@ class CarteFideliteFragment : Fragment() {
 
             binding.carteFideliteCouleur.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    val selectedType = items[position]
-                    /*carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
+                    val selectedType = itemscouleur[position]
+                    carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
                         oldCarteFidelite.copy(couleurBG = Couleur.valueOf(selectedType))
-                    }*/
+                    }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
