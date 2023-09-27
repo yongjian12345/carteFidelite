@@ -30,6 +30,7 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
         binding.carteFideliteNomCommerce.text = carteFidelite.nomCommerce
         binding.carteFideliteNumero.text = carteFidelite.numeroCarte.toString()
         binding.carteFideliteType.text = carteFidelite.typeCommerce.toString()
+        binding
 
         when (carteFidelite.typeCommerce) {
             Commerce.EPICERIE -> binding.carteFideliteIcon.setImageResource(R.drawable.baseline_local_grocery_store_24)
@@ -39,8 +40,8 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
             else -> binding.carteFideliteIcon.visibility = View.GONE  // Si aucune correspondance, cachez l'icône ou définissez une icône par défaut
         }
 
-        val colorInt = Color.parseColor(carteFidelite.couleurBG)
-        binding.root.updateRoundedBackgroundWithColor(colorInt)
+       /* val colorInt = Color.parseColor(carteFidelite.couleurBG)
+        binding.root.updateRoundedBackgroundWithColor(colorInt)*/
 
         binding.root.setOnClickListener {
             onCarteFideliteClicked(carteFidelite.id)

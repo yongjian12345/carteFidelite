@@ -20,5 +20,8 @@
         android:label="CarteFideliteFragment"
         tools:layout="@layout/fragment_carte_fidelite">
     <argument android:name="carteFideliteId" app:argType="java.util.UUID"/>
+        <action
+                android:id="@+id/show_carte_fidelite_list"
+            app:destination="@id/cartesFidelitesListFragment" />
     </fragment>
 </navigation>

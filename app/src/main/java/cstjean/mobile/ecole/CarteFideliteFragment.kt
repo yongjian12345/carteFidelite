@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -100,7 +101,11 @@ class CarteFideliteFragment : Fragment() {
                             if (carteFidelite != null) {
                                 cartesFidelitesRepository.deleteCarteFidelite(carteFidelite)
                             }
+                            findNavController().navigate(
+                                CarteFideliteFragmentDirections.showCarteFideliteList())
+
                         }
+
                     }
                 }
             }
