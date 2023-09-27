@@ -1,5 +1,7 @@
 package cstjean.mobile.ecole
 
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,15 +28,29 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
      */
     fun bind(carteFidelite: CarteFidelite, onCarteFideliteClicked: (cartefideliteId: UUID) -> Unit) {
         binding.carteFideliteNomCommerce.text = carteFidelite.nomCommerce
-        binding.carteFideliteCouleur.text = carteFidelite.couleurBG
         binding.carteFideliteNumero.text = carteFidelite.numeroCarte.toString()
         binding.carteFideliteType.text = carteFidelite.typeCommerce.toString()
 
+        when (carteFidelite.typeCommerce) {
+            Commerce.EPICERIE -> binding.carteFideliteIcon.setImageResource(R.drawable.baseline_local_grocery_store_24)
+            Commerce.RESTAURANT-> binding.carteFideliteIcon.setImageResource(R.drawable.baseline_restaurant_24)
+            Commerce.DIVERTISSEMENT -> binding.carteFideliteIcon.setImageResource(R.drawable.baseline_color_lens_24)
+            Commerce.AUTRE -> binding.carteFideliteIcon.setImageResource(R.drawable.baseline_shopping_basket_24)
+            else -> binding.carteFideliteIcon.visibility = View.GONE  // Si aucune correspondance, cachez l'icône ou définissez une icône par défaut
+        }
+
+        val colorInt = Color.parseColor(carteFidelite.couleurBG)
+        binding.root.updateRoundedBackgroundWithColor(colorInt)
 
         binding.root.setOnClickListener {
             onCarteFideliteClicked(carteFidelite.id)
         }
     }
+    fun View.updateRoundedBackgroundWithColor(color: Int) {
+        val backgroundDrawable = this.background as? GradientDrawable
+        backgroundDrawable?.setColor(color)
+    }
+
 }
 
 /**
