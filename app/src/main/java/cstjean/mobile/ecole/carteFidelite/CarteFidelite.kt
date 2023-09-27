@@ -7,12 +7,13 @@ import cstjean.mobile.ecole.Couleur
 import java.util.UUID
 
 /**
- * Un travail scolaire.
- * as
+ * Une carte fidelié.
+ *
  * @property id Le ID du travail.
- * @property nomCommerce Le nom du travail.
- * @property dateRemise La date de remise du travail.
- * @property estTermine Si le travail est terminé.
+ * @property nomCommerce Le nom du commerce.
+ * @property couleurBG La couleur de fond.
+ * @property typeCommerce Le type de commerce.
+ * @property numeroCarte Le numéro de la carte.
  *
  * @author Gabriel T. St-Hilaire
  */

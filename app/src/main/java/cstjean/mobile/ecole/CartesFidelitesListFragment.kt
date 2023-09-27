@@ -65,6 +65,12 @@ class CartesFidelitesListFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Lorsque la vue est créée.
+     *
+     * @param view La vue créée.
+     * @param savedInstanceState Les données conservées au changement d'état.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
