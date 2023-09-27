@@ -69,7 +69,6 @@ class CarteFideliteFragment : Fragment() {
         //val qRCodeWriter = QRCodeWriter()
         binding.apply {
             // prob je dois le faire quelque part d'autre.
-            carteFideliteQRCode.setImageBitmap(barcodeEncoder.encodeBitmap(carteFideliteNumeroCarte.toString(), BarcodeFormat.CODE_39, 800, 200))
 
             // pas sur de ce que j'ai fait ici
             boutonDelete.setOnClickListener {
@@ -86,11 +85,20 @@ class CarteFideliteFragment : Fragment() {
 
 
             carteFideliteNumeroCarte.doOnTextChanged { text, _, _, _ ->
-                carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
-                    oldCarteFidelite.copy(numeroCarte = text.toString().toInt())
+                carteFideliteQRCode.setImageBitmap(barcodeEncoder.encodeBitmap(text.toString(),BarcodeFormat.CODE_39, 800, 200))
 
+            }
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    carteFideliteViewModel.carteFidelite.collect { carteFidelite ->
+                        if (carteFidelite != null) {
+                            carteFideliteQRCode.setImageBitmap(barcodeEncoder.encodeBitmap(carteFidelite.numeroCarte.toString(), BarcodeFormat.CODE_39, 800, 200))
+                        }
+
+                    }
                 }
             }
+
             carteFideliteNomCommerce.doOnTextChanged { text, _, _, _ ->
                 carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
                     oldCarteFidelite.copy(nomCommerce = text.toString())
