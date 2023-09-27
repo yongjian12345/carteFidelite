@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -30,7 +32,7 @@ import kotlinx.coroutines.launch
 class CarteFideliteFragment : Fragment() {
     private var _binding: FragmentCarteFideliteBinding? = null
     private val cartesFidelitesRepository = CarteFideliteRepository.get()
-
+    private lateinit var callback : OnBackPressedCallback
     private val binding
         get() = checkNotNull(_binding) {
             "Binding est null. La vue est visible ??"
@@ -68,7 +70,9 @@ class CarteFideliteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val barcodeEncoder = BarcodeEncoder()
-
+        callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            // Handle the back button event
+        }
 
 
         binding.apply {
@@ -112,7 +116,14 @@ class CarteFideliteFragment : Fragment() {
 
 
             carteFideliteNumeroCarte.doOnTextChanged { text, _, _, _ ->
-                carteFideliteQRCode.setImageBitmap(barcodeEncoder.encodeBitmap(text.toString(),BarcodeFormat.CODE_39, 800, 200))
+                if (text.isNullOrBlank()) {
+                    callback.isEnabled = true
+                    carteFideliteQRCode.setImageBitmap(null)
+
+                } else {
+                    callback.isEnabled = false
+                    carteFideliteQRCode.setImageBitmap(barcodeEncoder.encodeBitmap(text.toString(),BarcodeFormat.CODE_39, 800, 200))
+                }
                 carteFideliteQRCodeText.text = text.toString()
             }
             viewLifecycleOwner.lifecycleScope.launch {
@@ -128,6 +139,7 @@ class CarteFideliteFragment : Fragment() {
             }
 
             carteFideliteNomCommerce.doOnTextChanged { text, _, _, _ ->
+               callback.isEnabled = text.isNullOrBlank()
                 carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
                     oldCarteFidelite.copy(nomCommerce = text.toString())
                 }
