@@ -40,8 +40,8 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
             else -> binding.carteFideliteIcon.visibility = View.GONE  // Si aucune correspondance, cachez l'icône ou définissez une icône par défaut
         }
 
-       /* val colorInt = Color.parseColor(carteFidelite.couleurBG)
-        binding.root.updateRoundedBackgroundWithColor(colorInt)*/
+       /* val colorInt = Color.parseColor(carteFidelite.couleurBG)*/
+        binding.root.updateRoundedBackgroundWithColor(R.color.purple_200)
 
         binding.root.setOnClickListener {
             onCarteFideliteClicked(carteFidelite.id)
