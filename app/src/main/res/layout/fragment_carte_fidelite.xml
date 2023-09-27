@@ -75,6 +75,10 @@
         android:id="@+id/carte_fidelite_QRCodeText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        tools:text="1234"
         android:text="TextView" />
 
     <Button
