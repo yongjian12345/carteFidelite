@@ -5,6 +5,7 @@ import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import cstjean.mobile.ecole.databinding.ListItemCarteFideliteBinding
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
@@ -38,8 +39,8 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
             Commerce.AUTRE -> binding.carteFideliteIcon.setImageResource(R.drawable.baseline_shopping_basket_24)
         }
 
-       /* val colorInt = Color.parseColor(carteFidelite.couleurBG)*/
-        binding.root.updateRoundedBackgroundWithColor(carteFidelite.couleurBG.colorResId)
+        val colorRes = ContextCompat.getColor(binding.root.context, carteFidelite.couleurBG.colorResId)
+        binding.root.updateRoundedBackgroundWithColor(colorRes)
 
         binding.root.setOnClickListener {
             onCarteFideliteClicked(carteFidelite.id)
