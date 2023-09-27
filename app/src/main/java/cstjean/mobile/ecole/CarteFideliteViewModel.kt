@@ -13,6 +13,8 @@ import java.util.UUID
  * ViewModel pour la liste des carte.
  *
  * @property cartesFidelites La liste des cartes.
+ *
+ * @author Raphael ostiguy & Yong Jian Qiu
  */
 class CarteFideliteViewModel( carteFideliteId : UUID) : ViewModel() {
 

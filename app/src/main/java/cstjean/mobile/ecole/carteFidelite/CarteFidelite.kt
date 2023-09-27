@@ -15,7 +15,7 @@ import java.util.UUID
  * @property typeCommerce Le type de commerce.
  * @property numeroCarte Le numéro de la carte.
  *
- * @author Gabriel T. St-Hilaire
+ * @author Raphael ostiguy & Yong Jian Qiu
  */
 @Entity
 data class CarteFidelite(

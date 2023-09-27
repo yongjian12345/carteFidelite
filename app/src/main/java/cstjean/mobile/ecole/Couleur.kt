@@ -1,7 +1,9 @@
 package cstjean.mobile.ecole
 
 /**
- * Les couleur possible du background d'une carte
+ * Les couleur possible du background d'une
+ *
+ * @author Raphael ostiguy & Yong Jian Qiu
  */
 enum class Couleur(val colorResId: Int) {
     ROUGE(R.color.rouge),
