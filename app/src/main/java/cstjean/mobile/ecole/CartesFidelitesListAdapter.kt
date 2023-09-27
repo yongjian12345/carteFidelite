@@ -39,7 +39,7 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
         }
 
        /* val colorInt = Color.parseColor(carteFidelite.couleurBG)*/
-        binding.root.updateRoundedBackgroundWithColor(R.color.purple_200)
+        binding.root.updateRoundedBackgroundWithColor(carteFidelite.couleurBG.colorResId)
 
         binding.root.setOnClickListener {
             onCarteFideliteClicked(carteFidelite.id)

@@ -161,19 +161,6 @@ class CarteFideliteFragment : Fragment() {
                     oldCarteFidelite.copy(nomCommerce = text.toString())
                 }
             }
-            /*carteFideliteCouleur.doOnTextChanged { text, _, _, _ ->
-                carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
-                    oldCarteFidelite.copy(couleurBG = text.toString())
-                }
-            }*/
-
-            /*carteFideliteTypeCommerce.doOnTextChanged { text, _, _, _ ->
-                carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
-                    oldCarteFidelite.copy(typeCommerce =  Commerce.valueOf(text.toString()))
-                }
-            }*/
-
-
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -206,6 +193,15 @@ class CarteFideliteFragment : Fragment() {
 
            // Définissez cet index comme élément sélectionné dans le Spinner
            carteFideliteTypeCommerce.setSelection(defaultPosition)
+
+            val itemsCouleur = Couleur.values().map { it.toString() }.toTypedArray()
+            val currentTypeCommerceCouleur = carteFidelite.couleurBG.toString()
+
+            // Trouvez l'index de cet élément dans votre tableau
+            val defaultPositionCouleur = itemsCouleur.indexOf(currentTypeCommerceCouleur)
+
+            // Définissez cet index comme élément sélectionné dans le Spinner
+            carteFideliteCouleur.setSelection(defaultPositionCouleur)
 
         }
     }
