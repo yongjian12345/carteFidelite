@@ -11,9 +11,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
-import cstjean.mobile.ecole.databinding.FragmentCarteFideliteBinding
+import com.google.zxing.BarcodeFormat
+import com.journeyapps.barcodescanner.BarcodeEncoder
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
+import cstjean.mobile.ecole.databinding.FragmentCarteFideliteBinding
 import kotlinx.coroutines.launch
+
 
 /**
  * Fragment pour la gestion d'un travail ou écran modifier.
@@ -60,8 +63,14 @@ class CarteFideliteFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val barcodeEncoder = BarcodeEncoder()
 
+
+        //val qRCodeWriter = QRCodeWriter()
         binding.apply {
+            // prob je dois le faire quelque part d'autre
+            carteFideliteQRCode.setImageBitmap(barcodeEncoder.encodeBitmap(carteFideliteNumeroCarte.toString(), BarcodeFormat.CODE_39, 800, 200))
+
             // pas sur de ce que j'ai fait ici
             boutonDelete.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
@@ -74,9 +83,12 @@ class CarteFideliteFragment : Fragment() {
                     }
                 }
             }
+
+
             carteFideliteNumeroCarte.doOnTextChanged { text, _, _, _ ->
                 carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
                     oldCarteFidelite.copy(numeroCarte = text.toString().toInt())
+
                 }
             }
             carteFideliteNomCommerce.doOnTextChanged { text, _, _, _ ->

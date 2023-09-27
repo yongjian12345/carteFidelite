@@ -42,6 +42,7 @@ android {
 
 dependencies {
     implementation ("com.github.blocoio:faker:2.0.1")
+    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
     implementation("androidx.fragment:fragment-ktx:1.6.1")
     implementation("androidx.recyclerview:recyclerview:1.3.1")
 
