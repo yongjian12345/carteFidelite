@@ -70,7 +70,7 @@ class CarteFideliteFragment : Fragment() {
         val barcodeEncoder = BarcodeEncoder()
 
 
-        //val qRCodeWriter = QRCodeWriter()
+
         binding.apply {
 
 
@@ -113,13 +113,14 @@ class CarteFideliteFragment : Fragment() {
 
             carteFideliteNumeroCarte.doOnTextChanged { text, _, _, _ ->
                 carteFideliteQRCode.setImageBitmap(barcodeEncoder.encodeBitmap(text.toString(),BarcodeFormat.CODE_39, 800, 200))
-
+                carteFideliteQRCodeText.text = text.toString()
             }
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     carteFideliteViewModel.carteFidelite.collect { carteFidelite ->
                         if (carteFidelite != null) {
                             carteFideliteQRCode.setImageBitmap(barcodeEncoder.encodeBitmap(carteFidelite.numeroCarte.toString(), BarcodeFormat.CODE_39, 800, 200))
+                            carteFideliteQRCodeText.text = carteFidelite.numeroCarte.toString()
                         }
 
                     }
