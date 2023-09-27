@@ -19,6 +19,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
+import io.bloco.faker.Faker
+
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -31,6 +33,7 @@ private const val TAG = "TravauxListFragment"
  */
 class CartesFidelitesListFragment : Fragment() {
     private var _binding: FragmentCartesFidelitesListBinding? = null
+    val faker = Faker()
     private val binding
         get() = checkNotNull(_binding) {
             "Binding est null. La vue est visible ??"
@@ -87,10 +90,10 @@ class CartesFidelitesListFragment : Fragment() {
                         viewLifecycleOwner.lifecycleScope.launch {
                             val nouveauCarteFidelite = CarteFidelite(
                                 UUID.randomUUID(),
-                                "george",
-                                "roufge",
-                                Commerce.RESTAURANT,
-                                123,
+                                faker.company.name(),
+                                faker.color.hexColor(),
+                                Commerce.values().random(),
+                                faker.number.between(1, 10000)
                             )
                             cartesFidelitesListViewModel.addCarteFidelite(nouveauCarteFidelite)
                         }

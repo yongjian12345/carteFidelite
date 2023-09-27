@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation ("com.github.blocoio:faker:2.0.1")
     implementation("androidx.fragment:fragment-ktx:1.6.1")
     implementation("androidx.recyclerview:recyclerview:1.3.1")
 
