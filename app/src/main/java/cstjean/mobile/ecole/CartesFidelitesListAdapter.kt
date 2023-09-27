@@ -1,22 +1,21 @@
 package cstjean.mobile.ecole
 
-import android.graphics.Color
+
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import cstjean.mobile.ecole.databinding.ListItemCarteFideliteBinding
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
 import java.util.UUID
 
 /**
- * ViewHolder pour notre RecyclerView de travaux.
+ * ViewHolder pour notre RecyclerView de cartes.
  *
  * @property binding Binding de la vue pour une cellule.
  *
- * @author Gabriel T. St-Hilaire
+ * @author Raphael ostiguy & Yong Jian Qiu
  */
 class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -30,14 +29,13 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
         binding.carteFideliteNomCommerce.text = carteFidelite.nomCommerce
         binding.carteFideliteNumero.text = carteFidelite.numeroCarte.toString()
         binding.carteFideliteType.text = carteFidelite.typeCommerce.toString()
-        binding
+
 
         when (carteFidelite.typeCommerce) {
             Commerce.EPICERIE -> binding.carteFideliteIcon.setImageResource(R.drawable.baseline_local_grocery_store_24)
             Commerce.RESTAURANT-> binding.carteFideliteIcon.setImageResource(R.drawable.baseline_restaurant_24)
             Commerce.DIVERTISSEMENT -> binding.carteFideliteIcon.setImageResource(R.drawable.baseline_color_lens_24)
             Commerce.AUTRE -> binding.carteFideliteIcon.setImageResource(R.drawable.baseline_shopping_basket_24)
-            else -> binding.carteFideliteIcon.visibility = View.GONE  // Si aucune correspondance, cachez l'icône ou définissez une icône par défaut
         }
 
        /* val colorInt = Color.parseColor(carteFidelite.couleurBG)*/
@@ -47,7 +45,7 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
             onCarteFideliteClicked(carteFidelite.id)
         }
     }
-    fun View.updateRoundedBackgroundWithColor(color: Int) {
+    private fun View.updateRoundedBackgroundWithColor(color: Int) {
         val backgroundDrawable = this.background as? GradientDrawable
         backgroundDrawable?.setColor(color)
     }
@@ -55,11 +53,11 @@ class CarteFideliteHolder(private val binding: ListItemCarteFideliteBinding) :
 }
 
 /**
- * Adapter pour notre RecyclerView de travaux.
+ * Adapter pour notre RecyclerView de cartes.
  *
- * @property cartesFidelites Liste des travaux à afficher.
+ * @property cartesFidelites Liste des cartes à afficher.
  *
- * @author Gabriel T. St-Hilaire
+ * @author Raphael ostiguy & Yong Jian Qiu
  */
 class CarteFideliteListAdapter(
     private val cartesFidelites: List<CarteFidelite>,

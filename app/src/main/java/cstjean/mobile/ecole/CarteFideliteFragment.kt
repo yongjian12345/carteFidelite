@@ -42,7 +42,6 @@ class CarteFideliteFragment : Fragment() {
     private val carteFideliteViewModel: CarteFideliteViewModel by viewModels {
         CarteFideliteViewModelFactory(args.carteFideliteId)
     }
-    // Supprimer la variable travail et le onCreate
     /**
      * Instanciation de l'interface.
      *
@@ -96,8 +95,26 @@ class CarteFideliteFragment : Fragment() {
                 }
             }
 
+            val itemscouleur =  Couleur.values().map { it.toString() }.toTypedArray()
 
-            // pas sur de ce que j'ai fait ici
+            val adaptercouleur = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, itemscouleur)
+            binding.carteFideliteCouleur.adapter = adaptercouleur
+
+
+            binding.carteFideliteCouleur.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    val selectedType = items[position]
+                    /*carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
+                        oldCarteFidelite.copy(couleurBG = Couleur.valueOf(selectedType))
+                    }*/
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+            }
+
+
             boutonDelete.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
                     viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -144,11 +161,11 @@ class CarteFideliteFragment : Fragment() {
                     oldCarteFidelite.copy(nomCommerce = text.toString())
                 }
             }
-            carteFideliteCouleur.doOnTextChanged { text, _, _, _ ->
+            /*carteFideliteCouleur.doOnTextChanged { text, _, _, _ ->
                 carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
                     oldCarteFidelite.copy(couleurBG = text.toString())
                 }
-            }
+            }*/
 
             /*carteFideliteTypeCommerce.doOnTextChanged { text, _, _, _ ->
                 carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
@@ -171,7 +188,7 @@ class CarteFideliteFragment : Fragment() {
 
     private fun updateUi( carteFidelite: CarteFidelite) {
         binding.apply {
-            // To DO convenablement
+
             // Pour éviter une loop infinie avec le update
             if (carteFideliteNumeroCarte.text.toString() != carteFidelite.numeroCarte.toString()) {
                 carteFideliteNumeroCarte.setText(carteFidelite.numeroCarte.toString())
@@ -179,11 +196,11 @@ class CarteFideliteFragment : Fragment() {
             if (carteFideliteNomCommerce.text.toString() != carteFidelite.nomCommerce) {
                 carteFideliteNomCommerce.setText(carteFidelite.nomCommerce)
             }
-            carteFideliteCouleur.setText(carteFidelite.couleurBG)
+
 
             val items = Commerce.values().map { it.toString() }.toTypedArray()
             val currentTypeCommerce = carteFidelite.typeCommerce.toString()
-            Log.d("DEBUG_TAG", "Items: $currentTypeCommerce")
+
             // Trouvez l'index de cet élément dans votre tableau
             val defaultPosition = items.indexOf(currentTypeCommerce)
 

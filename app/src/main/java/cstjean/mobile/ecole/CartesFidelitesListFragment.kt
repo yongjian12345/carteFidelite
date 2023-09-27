@@ -1,7 +1,6 @@
 package cstjean.mobile.ecole
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -24,12 +23,11 @@ import io.bloco.faker.Faker
 import kotlinx.coroutines.launch
 import java.util.UUID
 
-private const val TAG = "TravauxListFragment"
 
 /**
- * Fragment pour la liste des travaux.
+ * Fragment pour la liste des cartes.
  *
- * @author Gabriel T. St-Hilaire
+ * @author Raphael ostiguy & Yong Jian Qiu
  */
 class CartesFidelitesListFragment : Fragment() {
     private var _binding: FragmentCartesFidelitesListBinding? = null
@@ -73,7 +71,7 @@ class CartesFidelitesListFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 cartesFidelitesListViewModel.cartesFidelites.collect {cartesFidelite ->
                     binding.cartesFidelitesRecyclerView.adapter = CarteFideliteListAdapter(cartesFidelite) { cartefideliteId ->
-                        Log.d(TAG, cartefideliteId.toString())
+
                         findNavController().navigate(CartesFidelitesListFragmentDirections.showCarteFideliteDetail(cartefideliteId))
                     }
                 }
@@ -91,7 +89,7 @@ class CartesFidelitesListFragment : Fragment() {
                             val nouveauCarteFidelite = CarteFidelite(
                                 UUID.randomUUID(),
                                 faker.company.name(),
-                                faker.color.hexColor(),
+                                Couleur.values().random(),
                                 Commerce.values().random(),
                                 faker.number.between(1, 10000)
                             )

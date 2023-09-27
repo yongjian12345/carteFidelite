@@ -14,4 +14,14 @@
     <string name="carte_fidelite_couleur_hint">Entrez la couleur de la carte</string>
     <string name="carte_fidelite_type_hint">Entrez le type de commerce de la carte</string>
     <string name="delete">Delete</string>
+
+    <string-array name="color_names">
+        <item>Purple 200</item>
+        <item>Purple 500</item>
+        <item>Purple 700</item>
+        <item>Teal 200</item>
+        <item>Teal 700</item>
+        <item>Black</item>
+        <item>White</item>
+    </string-array>
 </resources>

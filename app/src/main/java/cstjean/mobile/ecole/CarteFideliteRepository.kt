@@ -4,15 +4,16 @@ import androidx.room.Room
 import cstjean.mobile.ecole.database.CarteFideliteDatabase
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.util.UUID
 
 private const val DATABASE_NAME = "carteFidelite-database"
 
-class CarteFideliteRepository private constructor(
+class CarteFideliteRepository @OptIn(DelicateCoroutinesApi::class)
+private constructor(
     context: Context,
     private val coroutineScope: CoroutineScope = GlobalScope) {
     private val database: CarteFideliteDatabase = Room
