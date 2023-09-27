@@ -1,5 +1,6 @@
 package cstjean.mobile.ecole.database
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import cstjean.mobile.ecole.carteFidelite.CarteFidelite
@@ -18,4 +19,8 @@ interface CarteFideliteDao {
 
     @Update
     suspend fun updateCarteFidelite(carteFidelite: CarteFidelite)
+
+    @Delete
+    suspend fun deleteCarteFidelite(carteFidelite: CarteFidelite)
+
 }

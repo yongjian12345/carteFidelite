@@ -6,6 +6,7 @@ import cstjean.mobile.ecole.carteFidelite.CarteFidelite
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -25,6 +26,10 @@ class CarteFideliteRepository private constructor(
         coroutineScope.launch {
             database.carteFideliteDao().updateCarteFidelite(carteFidelite)
         }
+    }
+
+    suspend fun deleteCarteFidelite(carteFidelite: CarteFidelite) {
+        database.carteFideliteDao().deleteCarteFidelite(carteFidelite)
     }
 
     fun getCartesFidelites(): Flow<List<CarteFidelite>> = database.carteFideliteDao().getCartesFidelites()

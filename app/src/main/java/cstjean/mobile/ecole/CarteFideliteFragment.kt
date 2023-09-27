@@ -22,6 +22,8 @@ import kotlinx.coroutines.launch
  */
 class CarteFideliteFragment : Fragment() {
     private var _binding: FragmentCarteFideliteBinding? = null
+    private val cartesFidelitesRepository = CarteFideliteRepository.get()
+
     private val binding
         get() = checkNotNull(_binding) {
             "Binding est null. La vue est visible ??"
@@ -58,14 +60,20 @@ class CarteFideliteFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*carteFideliteNumeroCarte.setText(carteFidelite.numeroCarte.toString())
-    }
-    carteFideliteNomCommerce.setText(carteFidelite.nomCommerce)
-    carteFideliteCouleur.setText(carteFidelite.couleurBG)
-    carteFideliteTypeCommerce.setText(carteFidelite.typeCommerce.toString())*/
-
 
         binding.apply {
+            // pas sur de ce que j'ai fait ici
+            boutonDelete.setOnClickListener {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                        carteFideliteViewModel.carteFidelite.collect { carteFidelite ->
+                            if (carteFidelite != null) {
+                                cartesFidelitesRepository.deleteCarteFidelite(carteFidelite)
+                            }
+                        }
+                    }
+                }
+            }
             carteFideliteNumeroCarte.doOnTextChanged { text, _, _, _ ->
                 carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
                     oldCarteFidelite.copy(numeroCarte = text.toString().toInt())
