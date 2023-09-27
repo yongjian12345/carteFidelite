@@ -1,9 +1,12 @@
 package cstjean.mobile.ecole
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -68,7 +71,26 @@ class CarteFideliteFragment : Fragment() {
 
         //val qRCodeWriter = QRCodeWriter()
         binding.apply {
-            // prob je dois le faire quelque part d'autre.
+
+
+            val items = Commerce.values().map { it.toString() }.toTypedArray()
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, items)
+
+            binding.carteFideliteTypeCommerce.adapter = adapter
+
+            binding.carteFideliteTypeCommerce.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    val selectedType = items[position]
+                    carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
+                        oldCarteFidelite.copy(typeCommerce = Commerce.valueOf(selectedType))
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+            }
+
 
             // pas sur de ce que j'ai fait ici
             boutonDelete.setOnClickListener {
@@ -110,11 +132,13 @@ class CarteFideliteFragment : Fragment() {
                 }
             }
 
-            carteFideliteTypeCommerce.doOnTextChanged { text, _, _, _ ->
+            /*carteFideliteTypeCommerce.doOnTextChanged { text, _, _, _ ->
                 carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
                     oldCarteFidelite.copy(typeCommerce =  Commerce.valueOf(text.toString()))
                 }
-            }
+            }*/
+
+
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -134,9 +158,20 @@ class CarteFideliteFragment : Fragment() {
             if (carteFideliteNumeroCarte.text.toString() != carteFidelite.numeroCarte.toString()) {
                 carteFideliteNumeroCarte.setText(carteFidelite.numeroCarte.toString())
             }
-            carteFideliteNomCommerce.setText(carteFidelite.nomCommerce)
+            if (carteFideliteNomCommerce.text.toString() != carteFidelite.nomCommerce) {
+                carteFideliteNomCommerce.setText(carteFidelite.nomCommerce)
+            }
             carteFideliteCouleur.setText(carteFidelite.couleurBG)
-            carteFideliteTypeCommerce.setText(carteFidelite.typeCommerce.toString())
+
+            val items = Commerce.values().map { it.toString() }.toTypedArray()
+            val currentTypeCommerce = carteFidelite.typeCommerce.toString()
+            Log.d("DEBUG_TAG", "Items: $currentTypeCommerce")
+            // Trouvez l'index de cet élément dans votre tableau
+            val defaultPosition = items.indexOf(currentTypeCommerce)
+
+           // Définissez cet index comme élément sélectionné dans le Spinner
+           carteFideliteTypeCommerce.setSelection(defaultPosition)
+
         }
     }
 
