@@ -85,10 +85,8 @@ class CarteFideliteFragment : Fragment() {
 
 
             carteFideliteNumeroCarte.doOnTextChanged { text, _, _, _ ->
-                carteFideliteViewModel.updateCarteFidelite { oldCarteFidelite ->
-                    oldCarteFidelite.copy(numeroCarte = text.toString().toInt())
+                carteFideliteQRCode.setImageBitmap(barcodeEncoder.encodeBitmap(text.toString(),BarcodeFormat.CODE_39, 800, 200))
 
-                }
             }
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
