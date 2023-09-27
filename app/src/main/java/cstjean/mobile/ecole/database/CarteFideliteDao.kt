@@ -7,6 +7,12 @@ import cstjean.mobile.ecole.carteFidelite.CarteFidelite
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
 import androidx.room.Update
+
+/**
+ * DAO pour les cartes de fidélité.
+ *
+ * @author Raphael ostiguy & Yong Jian Qiu
+ */
 @Dao
 interface CarteFideliteDao {
     @Query("SELECT * FROM carteFidelite")

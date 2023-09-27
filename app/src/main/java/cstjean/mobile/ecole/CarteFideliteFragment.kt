@@ -25,20 +25,42 @@ import kotlinx.coroutines.launch
 
 
 /**
- * Fragment pour la gestion d'un travail ou écran modifier.
+ * Fragment pour la gestion d'une carte de fidelité ou écran modifier.
  *
- * @author Gabriel T. St-Hilaire
+ * @author Raphael ostiguy & Yong Jian Qiu
  */
 class CarteFideliteFragment : Fragment() {
+    /**
+     * Le binding pour ce fragment.
+     */
     private var _binding: FragmentCarteFideliteBinding? = null
+
+    /**
+     * Le repository pour les cartes de fidelité.
+     */
     private val cartesFidelitesRepository = CarteFideliteRepository.get()
+
+    /**
+     * Le callback pour le bouton back.
+     */
     private lateinit var callback : OnBackPressedCallback
+
+    /**
+     * Le binding pour ce fragment.
+     */
     private val binding
         get() = checkNotNull(_binding) {
             "Binding est null. La vue est visible ??"
         }
 
+    /**
+     * Les arguments de la vue.
+     */
     private val args: CarteFideliteFragmentArgs by navArgs()
+
+    /**
+     * Le ViewModel pour ce fragment.
+     */
     private val carteFideliteViewModel: CarteFideliteViewModel by viewModels {
         CarteFideliteViewModelFactory(args.carteFideliteId)
     }
@@ -173,6 +195,11 @@ class CarteFideliteFragment : Fragment() {
     }
 
 
+    /**
+     * Permet de mettre à jour l'interface.
+     *
+     * @param carteFidelite La carte de fidelité à afficher.
+     */
     private fun updateUi( carteFidelite: CarteFidelite) {
         binding.apply {
 

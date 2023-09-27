@@ -17,9 +17,19 @@ import kotlinx.coroutines.flow.StateFlow
  * @author Raphael ostiguy & Yong Jian Qiu
  */
 class CartesFidelitesListViewModel : ViewModel() {
+    /**
+     * Le repository pour les cartes de fidelité.
+     */
     private val cartesFidelitesRepository = CarteFideliteRepository.get()
 
+    /**
+     * La liste des cartes de fidelité.
+     */
     private val _cartesFidelites: MutableStateFlow<List<CarteFidelite>> = MutableStateFlow(emptyList())
+
+    /**
+     * La liste des cartes de fidelité.
+     */
     val cartesFidelites: StateFlow<List<CarteFidelite>> = _cartesFidelites
     init {
         viewModelScope.launch {
